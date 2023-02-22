@@ -8,7 +8,7 @@ app.use(express.json());
  *  Basic Phase 1 - Plain-text response
  *     Method: GET
  *     Route: /version
- *     Response: 1.0.0
+ *     Response (Text): "1.0.0"
  */
 // Your code here
 
@@ -17,10 +17,15 @@ app.use(express.json());
  *      Method: GET
  *      Route: /viewers
  *      Route Parameter: id
- *      Response: JSON containing user object with id, first name, last name,
- *                birthdate and list of favorite movies
+ *      Response (JSON): user object with id, first name, last name,
+ *                birth date and list of favorite movies
+ *          id - route parameter
+ *          firstName - string
+ *          lastName - string
+ *          birthDate - date (format: MM/DD/YYYY)
+ *          favoriteMovies - array of strings
  *
- *  Hint: Use your name, birthdate and favorite movies (as strings in the code)
+ *  Hint: Use your name, birth date and favorite movies (as strings in the code)
  *  combined with the id sent as a route parameter in the url
  */
 // Your code here
@@ -28,10 +33,10 @@ app.use(express.json());
 /** Basic Phase 3 - Query params in URL
  *      Method: GET
  *      Route: /info
- *      Request: message
- *      Response: message (reflected back to the user)
+ *      Request query parameters: message
+ *      Response (Text): message query parameter reflected back to the user
  *      Error Handling: If "message" is missing from the query string,
- *                      then respond with "message required"
+ *                      then respond with the text "message required"
  *
  *      Sample routes:
  *          /info?message=Hello, world!
@@ -67,14 +72,14 @@ app.use(express.json());
  *          isFavorite - boolean
  *
  *      Sample request object:
- *          {"name":"Bash","year":"2002","favorite":"on"}
+ *          { "name": "Bash", "year": "2002", "favorite": "on" }
  *      Sample response object:
- *          {"id":7884906,"name":"Bash","year":2002,"isFavorite":true}
+ *          { "id": 7884906, "name": "Bash", "year": 2002, "isFavorite": true }
  *
  *      Alternate request object:
- *          {"name":"Honey Sweet","year":"1967"}
+ *          { "name": "Honey Sweet", "year": "1967" }
  *      Alternate response object:
- *          {"id":98765432,"name":"Honey Sweet","year":1967,"isFavorite":false}
+ *          { "id": 98765432, "name": "Honey Sweet", "year": 1967, "isFavorite": false }
  */
 // Your code here
 
@@ -96,5 +101,9 @@ app.use(express.json());
 // Your code here
 
 // DO NOT EDIT - Set port and listener
-const port = 5000;
-app.listen(port, () => console.log('Server is listening on port', port));
+if (require.main === module) {
+    const port = 8000;
+    app.listen(port, () => console.log('Server is listening on port', port));
+} else {
+    module.exports = app;
+}
